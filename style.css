@@ -1,0 +1,459 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rajdhani', 'Segoe UI', Tahoma, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 70, 85, 0.8);
+}
+
+body {
+    /* Анімований градієнт для фону, щоб скло гарно його розмивало */
+    background: linear-gradient(135deg, #0b0b0c, #2a0815, #120b1c, #0b0b0c);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- СКЛЯНА БІЧНА ПАНЕЛЬ (ЛІВА) --- */
+.sidebar {
+    width: 280px;
+    background: rgba(20, 20, 25, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.logo {
+    padding: 30px 20px 20px;
+    text-align: center;
+}
+
+.logo h2 {
+    color: #ff4655;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 70, 85, 0.5);
+}
+
+.user-profile {
+    padding: 10px 20px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #a0a0a0;
+    font-size: 16px;
+    gap: 12px;
+}
+
+.profile-photo-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 70, 85, 0.7);
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-photo-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 70, 85, 0.6);
+}
+
+.user-profile strong {
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+.settings-btn {
+    display: none;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ece8e1;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.settings-btn:hover {
+    background-color: rgba(255, 70, 85, 0.8);
+    border-color: rgba(255, 70, 85, 1);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
+}
+
+/* --- НАВІГАЦІЯ (МЕНЮ) --- */
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0;
+    gap: 8px;
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    color: #8a8a93;
+    padding: 14px 25px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    padding-left: 30px;
+}
+
+.menu-btn.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border-left: 4px solid #ff4655;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.game-icon {
+    width: 38px; 
+    height: 38px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* --- ОСНОВНИЙ КОНТЕНТ --- */
+.content {
+    flex: 1;
+    padding: 60px;
+    background: transparent; /* Прозорий, щоб бачити градієнт */
+    overflow-y: auto;
+}
+
+.content h1 {
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 42px;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.content p {
+    color: #cfcfcf;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.game-banner {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.game-banner:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(255, 70, 85, 0.15);
+}
+
+.tab-content {
+    display: none;
+}
+
+.active-tab {
+    display: block;
+    animation: fadeIn 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- СКЛЯНІ МОДАЛЬНІ ВІКНА --- */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: rgba(30, 30, 35, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 45px 40px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+/* СТИЛІ ДЛЯ ВЗЯТОК ЛОГІН/РЕЄСТРАЦІЯ */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.auth-tab:hover {
+    color: #ffffff;
+}
+
+.auth-tab.active {
+    color: #ff4655;
+    border-bottom: 2px solid #ff4655;
+}
+
+.modal-box h2 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-size: 36px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.modal-subtitle {
+    text-align: center;
+    color: #ff4655;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* СКЛЯНА ПРАВА ПАНЕЛЬ НАЛАШТУВАНЬ */
+.right-sidebar {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 350px;
+    height: 100vh;
+    background: rgba(20, 20, 25, 0.5);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
+    z-index: 900;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+.right-sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+}
+
+.sidebar-header h3 {
+    color: #ffffff;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff4655;
+    transform: rotate(90deg);
+}
+
+/* --- ГЕЙМЕРСЬКИЙ СКЛЯНИЙ ДИЗАЙН ІНПУТІВ --- */
+.input-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #cfcfcf;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: rgba(255, 70, 85, 0.8);
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.25);
+    background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.error-text {
+    color: #ff4655;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+    font-weight: 600;
+}
+
+/* --- КАСТОМНЕ ЗАВАНТАЖЕННЯ ФАЙЛУ --- */
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-file-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.custom-file-btn:hover {
+    border-color: rgba(255, 70, 85, 0.8);
+    background-color: rgba(255, 70, 85, 0.8);
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
+}
+
+.file-name-text {
+    color: #888;
+    font-size: 14px;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+/* --- ГЕЙМЕРСЬКІ КНОПКИ (Submit) --- */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255, 70, 85, 0.9), rgba(212, 34, 50, 0.9));
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    backdrop-filter: blur(4px);
+}
+
+.submit-btn:hover {
+    box-shadow: 0 8px 20px rgba(255, 70, 85, 0.4);
+    transform: translateY(-3px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}

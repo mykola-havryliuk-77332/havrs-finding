@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Havr`s finding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Havr`s finding</h2>
+            </div>
+            
+            <div class="user-profile">
+                <img src="img/user.jpg" alt="Player Photo" class="profile-photo-icon" id="player-photo">
+                <span id="player-display">Player: <strong>Guest</strong></span>
+                <button id="settings-btn" class="settings-btn" onclick="openSettings()" style="display: none;">⚙️ Settings</button>
+            </div>
+
+            <nav class="menu">
+                <button class="menu-btn" onclick="handleTabClick(this, 'cs-tab')">
+                    <img src="img/cs.jpg" alt="CS Icon" class="game-icon"> 
+                    Counter-Strike
+                </button>
+                <button class="menu-btn" onclick="handleTabClick(this, 'val-tab')">
+                    <img src="img/valorant.jpg" alt="VAL Icon" class="game-icon"> 
+                    Valorant
+                </button>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="welcome-tab" class="tab-content active-tab">
+                <h1>Welcome to Havr`s finding</h1>
+                <p>Please select a game from the menu to get started and find your perfect squad.</p>
+            </section>
+
+            <section id="cs-tab" class="tab-content">
+                <img src="img/csside.jpg" alt="CS Banner" class="game-banner">
+                <h1>Find Teammates in Counter-Strike</h1>
+                <p>Select your criteria to find the perfect squad for Premier or Faceit matches.</p>
+            </section>
+
+            <section id="val-tab" class="tab-content">
+                <img src="img/valoside.jpg" alt="Valorant Banner" class="game-banner">
+                <h1>Find Teammates in Valorant</h1>
+                <p>Search for specific agents like Main Duelist or Initiator to balance your team composition.</p>
+            </section>
+        </main>
+    </div>
+
+    <aside class="right-sidebar" id="right-sidebar">
+        <div class="sidebar-header">
+            <h3>Profile Settings</h3>
+            <button class="close-btn" onclick="closeSettings()">✕</button>
+        </div>
+        <div class="settings-content">
+            <div class="input-group">
+                <label>Upload Avatar</label>
+                <div class="custom-file-upload">
+                    <input type="file" id="photo-upload" accept="image/*" hidden>
+                    <label for="photo-upload" class="custom-file-btn">Choose File</label>
+                    <span id="file-name-display" class="file-name-text">No file chosen</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="change-nickname">New Nickname</label>
+                <input type="text" id="change-nickname" placeholder="Enter new nickname">
+            </div>
+            <button class="submit-btn" onclick="saveSettings()">Save Changes</button>
+        </div>
+    </aside>
+
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchAuth('log')">Login</button>
+                <button class="auth-tab" id="tab-register" onclick="switchAuth('reg')">Register</button>
+            </div>
+            
+            <h2 id="auth-title">Welcome Back</h2>
+            <p class="modal-subtitle" id="auth-subtitle">Login to access game lobbies</p>
+            
+            <form id="auth-form">
+                <div class="input-group" id="nick-group" style="display: none;">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" id="nickname" placeholder="e.g., Nick">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                    <span id="error-msg" class="error-text"></span>
+                </div>
+                <button type="submit" class="submit-btn" id="submit-btn">Login & Enter</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
